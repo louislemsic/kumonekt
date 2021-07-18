@@ -32,7 +32,7 @@ const Chats = () => {
             return;
         }
 
-        axios.get('https://api.chatengine.io/users/me', {
+        axios.get('https://api.chatengine.io/users/me/', {
             headers: {
                 "project-id": process.env.REACT_APP_CHAT_ENGINE_ID,
                 "user-name": user.email,
@@ -52,9 +52,9 @@ const Chats = () => {
                 .then((avatar) => {
                     formData.append('avatar', avatar, avatar.name);
 
-                    axios.post('https://api.chatengine.io/users', 
+                    axios.post('https://api.chatengine.io/users/', 
                         formData, 
-                        { headers: {"private-key": process.env.REACT_APP_CHAT_ENGINE_KEY} }
+                        { headers: { "private-key": process.env.REACT_APP_CHAT_ENGINE_KEY } }
                     )
                     .then(() => setLoading(false))
                     .catch((error) => console.log(error))
@@ -63,7 +63,7 @@ const Chats = () => {
     }, [user, history]);
 
 
-    if(!user || loading) return '';
+    if(!user || loading) return 'Still loading... Please wait.';
 
     return (
         <div className="chats-page">
